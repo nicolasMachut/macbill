@@ -21,6 +21,6 @@ public class Customer {
 
     @NotNull
     @Valid
-    private Address address;
+    private fr.macbill.CustomerService.documents.Address address;
 
 }

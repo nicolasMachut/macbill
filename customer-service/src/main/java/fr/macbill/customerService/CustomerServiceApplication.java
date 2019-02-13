@@ -1,4 +1,4 @@
-package fr.macbill.CustomerService;
+package fr.macbill.customerService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

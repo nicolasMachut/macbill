@@ -1,7 +1,6 @@
 package fr.macbill.CustomerService.handlers;
 
 import fr.macbill.CustomerService.services.CustomerService;
-import fr.macbill.CustomerService.services.CustomerServiceImpl;
 import fr.macbill.CustomerService.documents.Customer;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;

@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>fr.macbill</groupId>
-	<artifactId>CustomerService</artifactId>
+	<artifactId>customer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CustomerService</name>
+	<name>customer-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<dependencies>
