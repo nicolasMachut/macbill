@@ -12,6 +12,7 @@
         <module>CustomerService</module>
         <module>gateway</module>
         <module>discovery</module>
+        <module>config-server</module>
     </modules>
 
     <dependencyManagement>
@@ -52,6 +53,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
             <version>2.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
     </dependencies>
 
