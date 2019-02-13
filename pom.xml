@@ -13,6 +13,7 @@
         <module>gateway</module>
         <module>discovery</module>
         <module>config-server</module>
+        <module>mission-service</module>
     </modules>
 
     <dependencyManagement>
