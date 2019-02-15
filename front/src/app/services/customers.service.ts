@@ -11,19 +11,19 @@ export class CustomersService {
   constructor(private httpClient: HttpClient) { }
 
   findAll(): Observable<Customer[]> {
-    return this.httpClient.get<Customer[]>('http://localhost:8080/customers');
+    return this.httpClient.get<Customer[]>('http://localhost:8585/customer-service/customers');
   }
 
   create(nameParam: string) {
     const customer: Customer = {
       name: nameParam
     };
-    this.httpClient.post<Customer>('http://localhost:8080/customer', customer).subscribe(newCustomer => {
+    this.httpClient.post<Customer>('http://localhost:8585/customer-service/customer', customer).subscribe(newCustomer => {
       this.newCustomer.emit(newCustomer);
     });
   }
 
   delete(customer: Customer) {
-    return this.httpClient.delete('http://localhost:8080/customer/' + customer.id);
+    return this.httpClient.delete('http://localhost:8585/customer-service/customer/' + customer.id);
   }
 }
