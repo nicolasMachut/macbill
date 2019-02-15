@@ -1,6 +1,6 @@
-package fr.macbill.CustomerService.services;
+package fr.macbill.customerService.services;
 
-import fr.macbill.CustomerService.documents.Customer;
+import fr.macbill.customerService.documents.Customer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

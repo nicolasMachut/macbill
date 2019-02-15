@@ -1,7 +1,7 @@
-package fr.macbill.CustomerService.services;
+package fr.macbill.customerService.services;
 
-import fr.macbill.CustomerService.documents.Customer;
-import fr.macbill.CustomerService.repositories.CustomerRepository;
+import fr.macbill.customerService.documents.Customer;
+import fr.macbill.customerService.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -1,8 +1,6 @@
 import {Component, NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatList} from "@angular/material";
-
-
+import {MatList} from '@angular/material';
 
 @Component({
   selector: 'app-root',

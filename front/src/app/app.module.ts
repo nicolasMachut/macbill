@@ -6,20 +6,26 @@ import { AppComponent } from './app.component';
 import { CustomersListComponent } from './customers-list/customers-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app.material.module';
-import {MyNavComponent} from "./my-nav/my-nav.component";
+import {CustomersService} from './services/customers.service';
+import {HttpClientModule} from '@angular/common/http';
+import { NewCustomerFormComponent } from './new-customer-form/new-customer-form.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomersListComponent, MyNavComponent
+    CustomersListComponent,
+    NewCustomerFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AppMaterialModule
+    AppMaterialModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [CustomersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

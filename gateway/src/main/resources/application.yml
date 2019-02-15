@@ -4,3 +4,16 @@ server:
 spring:
   application:
     name: gateway
+
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+
+zuul:
+  sensitiveHeaders:
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin

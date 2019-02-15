@@ -1,4 +1,4 @@
-package fr.macbill.CustomerService.documents;
+package fr.macbill.customerService.documents;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -18,9 +18,4 @@ public class Customer {
 
     @NotEmpty
     private String name;
-
-    @NotNull
-    @Valid
-    private fr.macbill.CustomerService.documents.Address address;
-
 }

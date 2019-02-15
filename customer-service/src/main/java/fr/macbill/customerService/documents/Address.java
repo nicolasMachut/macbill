@@ -1,4 +1,4 @@
-package fr.macbill.CustomerService.documents;
+package fr.macbill.customerService.documents;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 public class Address {
 
     @Id
-    private ObjectId _id;
+    private String id;
 
     @NotEmpty
     private String streetNumber;
