@@ -1,20 +1,29 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Customer} from '../shared/models/customer.model';
 
 @Injectable()
 export class CustomersService {
 
+  @Output() newCustomer: EventEmitter<object> = new EventEmitter();
+
   constructor(private httpClient: HttpClient) { }
 
-  findAll(): Observable<any> {
-    return this.httpClient.get<any[]>('http://localhost:8080/customers');
+  findAll(): Observable<Customer[]> {
+    return this.httpClient.get<Customer[]>('http://localhost:8080/customers');
   }
 
   create(nameParam: string) {
-    const customer = {
+    const customer: Customer = {
       name: nameParam
     };
-    return this.httpClient.post<object>('http://localhost:8080/customer', customer);
+    this.httpClient.post<Customer>('http://localhost:8080/customer', customer).subscribe(newCustomer => {
+      this.newCustomer.emit(newCustomer);
+    });
+  }
+
+  delete(customer: Customer) {
+    return this.httpClient.delete('http://localhost:8080/customer/' + customer.id);
   }
 }

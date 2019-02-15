@@ -1,2 +1,24 @@
-<app-customers-list></app-customers-list>
-<app-new-customer-form></app-new-customer-form>
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item routerLink="/">
+        <mat-icon>home</mat-icon>
+        <span>Accueil</span>
+      </button>
+      <button mat-menu-item routerLink="myCustomers">
+        <mat-icon>people_outline</mat-icon>
+        <span>Mes clients</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        <span routerLink="logout">Se déconnecter</span>
+      </button>
+    </mat-menu>
+  </span>
+  <span class="fill-remaining-space">MacBill</span>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

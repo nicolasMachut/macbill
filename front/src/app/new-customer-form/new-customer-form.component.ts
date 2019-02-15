@@ -8,17 +8,17 @@ import {CustomersService} from '../services/customers.service';
 })
 export class NewCustomerFormComponent implements OnInit {
 
-  name = 'test';
+  name: string;
 
   constructor(private customerService: CustomersService) { }
 
   ngOnInit() {
-  }
-
-  onSave() {
-    this.customerService.create(this.name).subscribe(data => {
-      console.log(data);
+    this.customerService.newCustomer.subscribe(() => {
+      this.name = '';
     });
   }
 
+  onSave() {
+    this.customerService.create(this.name);
+  }
 }

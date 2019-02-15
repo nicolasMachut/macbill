@@ -20,7 +20,7 @@ public class CustomerResource {
         this.customerService = customerService;
     }
 
-    @GetMapping(path = "/customers", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(path = "/customers")
     public Flux<Customer> findAll () {
         return this.customerService.findAll();
     }

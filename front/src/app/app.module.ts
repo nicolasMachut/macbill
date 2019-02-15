@@ -10,12 +10,14 @@ import {CustomersService} from './services/customers.service';
 import {HttpClientModule} from '@angular/common/http';
 import { NewCustomerFormComponent } from './new-customer-form/new-customer-form.component';
 import {FormsModule} from '@angular/forms';
+import { MyCustomersComponent } from './my-customers/my-customers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersListComponent,
-    NewCustomerFormComponent
+    NewCustomerFormComponent,
+    MyCustomersComponent
   ],
   imports: [
     BrowserModule,

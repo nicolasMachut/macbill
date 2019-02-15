@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Customer {
 
     @Id
-    private ObjectId _id;
+    private String id;
 
     @NotEmpty
     private String name;
