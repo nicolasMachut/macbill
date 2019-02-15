@@ -22,4 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
     public Mono<Customer> save (Customer customer) {
         return this.customerRepository.save(customer);
     }
+    public Mono<Void> delete (Customer customer) {
+        return this.customerRepository.delete(customer);
+    }
+
+    @Override
+    public Mono<Customer> findById(String id) {
+        return this.customerRepository.findById(id);
+    }
 }

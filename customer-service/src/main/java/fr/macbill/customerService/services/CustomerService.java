@@ -8,4 +8,7 @@ public interface CustomerService {
 
     Flux<Customer> findAll ();
     Mono<Customer> save (Customer customer);
+    Mono<Void> delete (Customer customer);
+    Mono<Customer> findById(String id);
+
 }
