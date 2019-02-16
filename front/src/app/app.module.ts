@@ -18,6 +18,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule} from '@angular/common';
+import {NewWorkDayComponent} from './new-work-day/new-work-day.component';
+import {WorkDayService} from './services/work-day.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {CommonModule} from '@angular/common';
     CustomersListComponent,
     NewCustomerFormComponent,
     MyCustomersComponent,
-    DemoComponent
+    DemoComponent,
+    NewWorkDayComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import {CommonModule} from '@angular/common';
       useFactory: adapterFactory
     })
   ],
-  providers: [CustomersService],
+  providers: [CustomersService, WorkDayService],
   bootstrap: [AppComponent],
   exports: [DemoComponent]
 })

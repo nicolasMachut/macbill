@@ -2,7 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef, NgModule
 } from '@angular/core';
 import {
   startOfDay,
@@ -22,6 +22,9 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import {NewWorkDayComponent} from "../new-work-day/new-work-day.component";
+import {MatDialog} from "@angular/material";
+import {WorkDayService} from "../services/work-day.service";
 
 const colors: any = {
   red: {
@@ -38,6 +41,12 @@ const colors: any = {
   }
 };
 
+@NgModule({
+  entryComponents: [
+    NewWorkDayComponent
+  ],
+})
+
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,7 +54,7 @@ const colors: any = {
   templateUrl: './demo-component.component.html'
 })
 export class DemoComponent {
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+  @ViewChild('new') modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
 
@@ -76,52 +85,25 @@ export class DemoComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  events: CalendarEvent[] = [];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen = false;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, public dialog: MatDialog, private workDayService: WorkDayService) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    const newDay = {
+      title: 'Client',
+      start: startOfDay(new Date()),
+      end: endOfDay(new Date()),
+      allDay: true,
+      color: colors.red,
+      draggable: true
+    };
+    this.dialog.open(NewWorkDayComponent, {
+      width: '250px',
+      data: {newDay}
+    });
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -142,7 +124,7 @@ export class DemoComponent {
                     }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
-    this.handleEvent('Dropped or resized', event);
+    // this.handleEvent('Dropped or resized', event);
     this.refresh.next();
   }
 
@@ -153,16 +135,18 @@ export class DemoComponent {
 
   addEvent(): void {
     this.events.push({
-      title: 'New event',
+      title: 'Client',
       start: startOfDay(new Date()),
       end: endOfDay(new Date()),
+      allDay: true,
       color: colors.red,
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      }
+      draggable: true
     });
+    this.workDayService.create();
+    this.refresh.next();
+  }
+  updateDateEvent(event): void {
+    event.end = event.start;
     this.refresh.next();
   }
 }

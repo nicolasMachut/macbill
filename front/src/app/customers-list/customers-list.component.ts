@@ -23,7 +23,9 @@ export class CustomersListComponent implements OnInit {
     });
     this.customerService.newCustomer.subscribe(customer => {
       this.customers.push(customer);
-      this.snackBar.open('Le client ' + customer.name + ' à été ajouté');
+      this.snackBar.open('Le client ' + customer.name + ' à été ajouté', '', {
+        duration: 3000
+      });
     });
   }
 
@@ -31,6 +33,8 @@ export class CustomersListComponent implements OnInit {
     this.customerService.delete(customerToDelete).subscribe(() => {
       this.customers = this.customers.filter(customer => customer.id !== customerToDelete.id);
     });
-    this.snackBar.open('Le client ' + customerToDelete.name + ' à été supprimé');
+    this.snackBar.open('Le client ' + customerToDelete.name + ' à été supprimé', '', {
+      duration: 3000
+    });
   }
 }

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="accent">
   <span class="fill-remaining-space">
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>
@@ -11,6 +11,10 @@
       <button mat-menu-item routerLink="myCustomers">
         <mat-icon>people_outline</mat-icon>
         <span>Mes clients</span>
+      </button>
+      <button mat-menu-item routerLink="dashboard">
+        <mat-icon>multiline_chart</mat-icon>
+        <span>Mon tableau de bord</span>
       </button>
       <button mat-menu-item>
         <mat-icon>exit_to_app</mat-icon>
