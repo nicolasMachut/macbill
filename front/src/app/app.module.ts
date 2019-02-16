@@ -11,13 +11,21 @@ import {HttpClientModule} from '@angular/common/http';
 import { NewCustomerFormComponent } from './new-customer-form/new-customer-form.component';
 import {FormsModule} from '@angular/forms';
 import { MyCustomersComponent } from './my-customers/my-customers.component';
+import { DemoComponent } from './demo-component/demo-component.component';
+
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersListComponent,
     NewCustomerFormComponent,
-    MyCustomersComponent
+    MyCustomersComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +33,18 @@ import { MyCustomersComponent } from './my-customers/my-customers.component';
     BrowserAnimationsModule,
     AppMaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    FormsModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [CustomersService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [DemoComponent]
 })
 export class AppModule { }
