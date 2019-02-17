@@ -1,9 +1,10 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material';
 import {CustomersService} from '../services/customers.service';
 import {Customer} from '../shared/models/customer.model';
 import {FormControl} from '@angular/forms';
 import {WorkDayService} from '../services/work-day.service';
+import {WorkDay} from '../shared/interfaces/WorkDay';
 
 @Component({
   selector: 'app-new-work-day',
@@ -11,12 +12,14 @@ import {WorkDayService} from '../services/work-day.service';
   styleUrls: ['./new-work-day.component.scss']
 })
 export class NewWorkDayComponent implements OnInit {
-  customers: Array<Customer> = [];
-  date = new FormControl(new Date());
+  private customers: Array<Customer> = [];
+  private customer: Customer;
+  private workDay: WorkDay;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: object,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private customerService: CustomersService,
               private workDayService: WorkDayService) {
+    this.workDay = data.newDay;
   }
 
   ngOnInit() {
@@ -26,6 +29,8 @@ export class NewWorkDayComponent implements OnInit {
   }
 
   onSaveDay() {
-    this.workDayService.create(this.data.newDay);
+    this.workDay.customerId = this.customer.id;
+    this.workDay.title = this.customer.name;
+    this.workDayService.create(this.workDay);
   }
 }

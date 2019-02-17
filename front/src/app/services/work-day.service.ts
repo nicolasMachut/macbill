@@ -1,5 +1,7 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {WorkDay} from '../shared/interfaces/WorkDay';
 
 @Injectable()
 export class WorkDayService {
@@ -9,9 +11,15 @@ export class WorkDayService {
   constructor(private httpClient: HttpClient) { }
 
   create(newDay) {
-    console.log(newDay);
-    this.httpClient.post<object>('http://localhost:8585/work-day-service/workDay', newDay).subscribe(data => {
-      console.log(data);
+    this.httpClient.post<WorkDay>('http://localhost:8585/work-day-service/workDay', newDay).subscribe(data => {
+      data.customer = newDay.customer;
+      this.newWorkDay.emit(data);
     });
+  }
+  delete(workDay: WorkDay) {
+    return this.httpClient.delete('http://localhost:8585/work-day-service/workDay/' + workDay.id);
+  }
+  findAll(): Observable<WorkDay[]> {
+    return this.httpClient.get<WorkDay[]>('http://localhost:8585/work-day-service/workDays');
   }
 }

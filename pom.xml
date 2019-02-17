@@ -15,6 +15,7 @@
         <module>config-server</module>
         <module>mission-service</module>
         <module>work-day-service</module>
+        <module>aggregator-service</module>
     </modules>
 
     <dependencyManagement>

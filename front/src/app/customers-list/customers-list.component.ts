@@ -1,7 +1,8 @@
 import {Component, NgModule, OnInit} from '@angular/core';
-import {MatList, MatSnackBar} from '@angular/material';
+import {MatList} from '@angular/material';
 import {CustomersService} from '../services/customers.service';
 import {Customer} from '../shared/models/customer.model';
+import {SnackbarService} from '../services/snackbar.service';
 
 @NgModule({
   imports: [MatList],
@@ -15,7 +16,7 @@ import {Customer} from '../shared/models/customer.model';
 export class CustomersListComponent implements OnInit {
   customers: Array<Customer> = [];
 
-  constructor(private customerService: CustomersService, private snackBar: MatSnackBar) {}
+  constructor(private customerService: CustomersService, private snackBarService: SnackbarService) {}
 
   ngOnInit() {
     this.customerService.findAll().subscribe(data => {
@@ -23,9 +24,7 @@ export class CustomersListComponent implements OnInit {
     });
     this.customerService.newCustomer.subscribe(customer => {
       this.customers.push(customer);
-      this.snackBar.open('Le client ' + customer.name + ' à été ajouté', '', {
-        duration: 3000
-      });
+      this.snackBarService.open('Le client ' + customer.name + ' à été ajouté');
     });
   }
 
@@ -33,8 +32,6 @@ export class CustomersListComponent implements OnInit {
     this.customerService.delete(customerToDelete).subscribe(() => {
       this.customers = this.customers.filter(customer => customer.id !== customerToDelete.id);
     });
-    this.snackBar.open('Le client ' + customerToDelete.name + ' à été supprimé', '', {
-      duration: 3000
-    });
+    this.snackBarService.open('Le client ' + customerToDelete.name + ' à été supprimé');
   }
 }

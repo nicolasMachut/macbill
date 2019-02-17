@@ -11,7 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { NewCustomerFormComponent } from './new-customer-form/new-customer-form.component';
 import {FormsModule} from '@angular/forms';
 import { MyCustomersComponent } from './my-customers/my-customers.component';
-import { DemoComponent } from './demo-component/demo-component.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -20,6 +20,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {CommonModule} from '@angular/common';
 import {NewWorkDayComponent} from './new-work-day/new-work-day.component';
 import {WorkDayService} from './services/work-day.service';
+import {SnackbarService} from './services/snackbar.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import {WorkDayService} from './services/work-day.service';
     CustomersListComponent,
     NewCustomerFormComponent,
     MyCustomersComponent,
-    DemoComponent,
+    CalendarComponent,
     NewWorkDayComponent
   ],
   imports: [
@@ -46,8 +47,8 @@ import {WorkDayService} from './services/work-day.service';
       useFactory: adapterFactory
     })
   ],
-  providers: [CustomersService, WorkDayService],
+  providers: [CustomersService, WorkDayService, SnackbarService],
   bootstrap: [AppComponent],
-  exports: [DemoComponent]
+  exports: [CalendarComponent]
 })
 export class AppModule { }

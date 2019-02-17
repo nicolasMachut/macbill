@@ -25,4 +25,6 @@ public class WorkDay {
     private Date start;
 
     private String title;
+
+    private String customerId;
 }
