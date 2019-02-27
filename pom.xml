@@ -16,6 +16,7 @@
         <module>mission-service</module>
         <module>work-day-service</module>
         <module>aggregator-service</module>
+        <module>invoice-service</module>
     </modules>
 
     <dependencyManagement>

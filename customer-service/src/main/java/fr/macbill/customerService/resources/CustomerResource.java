@@ -1,10 +1,8 @@
-package fr.macbill.customerService;
+package fr.macbill.customerService.resources;
 
 import fr.macbill.customerService.documents.Customer;
-import fr.macbill.customerService.repositories.CustomerRepository;
 import fr.macbill.customerService.services.CustomerService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;

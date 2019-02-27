@@ -1,4 +1,4 @@
-package fr.macbill.customerService;
+package fr.macbill.customerService.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.CorsRegistry;

@@ -9,5 +9,5 @@ spring:
     name: work-day-service
 
 server:
-  port: 8181
+  port: 8282
 
