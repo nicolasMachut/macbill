@@ -27,7 +27,4 @@ public class Address {
 
     @NotEmpty
     private String city;
-
-    @NotEmpty
-    private String companyType;
 }

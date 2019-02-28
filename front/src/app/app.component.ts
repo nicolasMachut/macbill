@@ -13,12 +13,12 @@ import {AuthenticationService} from './services/authentification.service';
 })
 export class AppComponent implements OnInit {
   title = 'MacBill';
-  username;
+  email;
   constructor(private authentificationService: AuthenticationService) {}
 
   ngOnInit(): void {
     if (this.authentificationService.currentUserValue) {
-      this.username = this.authentificationService.currentUserValue.username;
+      this.email = this.authentificationService.currentUserValue.email;
     }
   }
 

@@ -19,18 +19,24 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http.post<HttpResponse<User>>('http://localhost:8585/login', { username, password }, {
+  login(email: string, password: string) {
+    return this.http.post<HttpResponse<User>>('http://localhost:8585/login', { email, password }, {
       observe: 'response'
     }).pipe(map(resp => {
       const token = resp.headers.get('Authorization');
-      const user = new User();
-      user.username = resp.body.username;
+      let user = new User();
+      user = resp.body;
       user.token = token;
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
       return user;
     }));
+  }
+
+  signup(user: User) {
+    return this.http.post<HttpResponse<any>>('http://localhost:8585/users/sign-up', user).subscribe(data => {
+      console.log(data);
+    });
   }
 
   logout() {

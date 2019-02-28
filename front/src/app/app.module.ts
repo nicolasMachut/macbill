@@ -8,7 +8,7 @@ import { AppMaterialModule } from './app.material.module';
 import {CustomersService} from './services/customers.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NewCustomerFormComponent } from './new-customer-form/new-customer-form.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MyCustomersComponent } from './my-customers/my-customers.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import {CommonModule} from '@angular/common';
@@ -36,6 +36,7 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     HttpClientModule,

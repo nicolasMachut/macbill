@@ -18,4 +18,11 @@ public class Customer {
 
     @NotEmpty
     private String name;
+
+    @NotNull
+    @Valid
+    private Address address;
+
+    @NotEmpty
+    private String companyType;
 }
