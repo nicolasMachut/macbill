@@ -16,9 +16,9 @@
         <mat-icon>multiline_chart</mat-icon>
         <span>Mon tableau de bord</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item *ngIf="username">
         <mat-icon>exit_to_app</mat-icon>
-        <span routerLink="logout">Se déconnecter</span>
+        <span>Se déconnecter ({{username}})</span>
       </button>
     </mat-menu>
   </span>

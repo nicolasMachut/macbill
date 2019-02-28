@@ -1,14 +1,12 @@
 package fr.macbill.gateway.services;
 
+import fr.macbill.gateway.UserPrincipal;
 import fr.macbill.gateway.documents.ApplicationUser;
 import fr.macbill.gateway.repositories.ApplicationUserRepository;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,6 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (applicationUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
+        return new UserPrincipal(applicationUser);
     }
 }
