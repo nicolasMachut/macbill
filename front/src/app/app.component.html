@@ -8,37 +8,25 @@
         <mat-icon>home</mat-icon>
         <span>Accueil</span>
       </button>
-      <button mat-menu-item routerLink="myCustomers">
+      <button mat-menu-item routerLink="myCustomers" *ngIf="isAuthenticated">
         <mat-icon>people_outline</mat-icon>
         <span>Mes clients</span>
       </button>
-      <button mat-menu-item routerLink="dashboard">
+      <button mat-menu-item routerLink="dashboard" *ngIf="isAuthenticated">
         <mat-icon>multiline_chart</mat-icon>
         <span>Mon tableau de bord</span>
       </button>
-      <button mat-menu-item *ngIf="email">
+      <button mat-menu-item *ngIf="isAuthenticated" (click)="oktaAuth.logout('/')">
         <mat-icon>exit_to_app</mat-icon>
-        <span>Se déconnecter ({{email}})</span>
+        <span>Se déconnecter</span>
+      </button>
+      <button mat-menu-item *ngIf="!isAuthenticated" (click)="oktaAuth.loginRedirect()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Se connecter</span>
       </button>
     </mat-menu>
   </span>
   <span class="fill-remaining-space">MacBill</span>
 </mat-toolbar>
-
-<mat-toolbar color="primary">
-  <span>Welcome to {{title}} {{isAuthenticated}}!</span>
-  <span class="toolbar-spacer"></span>
-  <button mat-raised-button color="accent" *ngIf="isAuthenticated"
-          (click)="oktaAuth.logout('/')">Logout
-  </button>
-</mat-toolbar>
-
-<mat-card *ngIf="!isAuthenticated">
-  <mat-card-content>
-    <button mat-raised-button color="accent"
-            (click)="oktaAuth.loginRedirect()">Login
-    </button>
-  </mat-card-content>
-</mat-card>
 
 <router-outlet></router-outlet>
