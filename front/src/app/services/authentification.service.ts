@@ -20,7 +20,7 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<HttpResponse<User>>('http://localhost:8585/login', { email, password }, {
+    /*return this.http.post<HttpResponse<User>>('http://localhost:8585/login', { email, password }, {
       observe: 'response'
     }).pipe(map(resp => {
       const token = resp.headers.get('Authorization');
@@ -30,7 +30,7 @@ export class AuthenticationService {
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
       return user;
-    }));
+    }));*/
   }
 
   signup(user: User) {

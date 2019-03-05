@@ -26,13 +26,15 @@
                 </small>
             </div>
             <div class="col-md-6 text-right">
-                <span class="font-weight-bolder">coober technologies</span>
+                <span class="font-weight-bolder" th:text="${customer.name}"></span>
                 <br/>
-                <span>41 rue du Professeur Calmette</span>
+                <span th:text="${customer.address.streetNumber}"></span>
+                <span th:text="${customer.address.route}"></span>
                 <br/>
-                <span>33150 Cenon</span>
+                <span th:text="${customer.address.postalCode}"></span>
+                <span th:text="${customer.address.city}"></span>
                 <br/>
-                <span>Société à responsabilité limitée</span>
+                <span th:text="${customer.companyType}"></span>
                 <br/>
                 <span>Date : 28/02/2019</span>
             </div>

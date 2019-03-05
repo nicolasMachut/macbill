@@ -4,9 +4,3 @@ spring:
       host: localhost
       database: CustomerServiceDatabase
 
-  application:
-    name: customer-service
-
-server:
-  port: 8080
-

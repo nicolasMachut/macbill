@@ -3,8 +3,8 @@ package fr.macbill.customerService.services;
 import fr.macbill.customerService.documents.Customer;
 import fr.macbill.customerService.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -15,19 +15,19 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Flux<Customer> findAll () {
-        return this.customerRepository.findAll();
+    public Iterable<Customer> findAll(String userId) {
+        return this.customerRepository.findAllByUserId(userId);
     }
 
-    public Mono<Customer> save (Customer customer) {
+    public Customer save (Customer customer) {
         return this.customerRepository.save(customer);
     }
-    public Mono<Void> delete (Customer customer) {
-        return this.customerRepository.delete(customer);
+    public void delete(String customerId, String userId) {
+        this.customerRepository.deleteByIdAndUserId(customerId, userId);
     }
 
     @Override
-    public Mono<Customer> findById(String id) {
-        return this.customerRepository.findById(id);
+    public Optional<Customer> findById(String id, String userId) {
+        return this.customerRepository.findByIdAndUserId(id, userId);
     }
 }

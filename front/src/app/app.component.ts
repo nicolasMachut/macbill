@@ -1,7 +1,7 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatList} from '@angular/material';
-import {AuthenticationService} from './services/authentification.service';
+import {OktaAuthService} from '@okta/okta-angular';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +13,15 @@ import {AuthenticationService} from './services/authentification.service';
 })
 export class AppComponent implements OnInit {
   title = 'MacBill';
-  email;
-  constructor(private authentificationService: AuthenticationService) {}
+  isAuthenticated: boolean;
 
-  ngOnInit(): void {
-    if (this.authentificationService.currentUserValue) {
-      this.email = this.authentificationService.currentUserValue.email;
-    }
+  constructor(public oktaAuth: OktaAuthService) {
+    this.oktaAuth.$authenticationState.subscribe(
+      (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
+    );
   }
 
-  logout() {
-    this.authentificationService.logout();
+  async ngOnInit() {
+    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
   }
 }

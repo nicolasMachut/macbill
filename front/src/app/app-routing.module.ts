@@ -2,17 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {MyCustomersComponent} from './my-customers/my-customers.component';
 import {CalendarComponent} from './calendar/calendar.component';
-import {AuthGuard} from './guards/auth.guards';
-import {LoginComponent} from './login/login.component';
+import { OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
+
+
 
 const routes: Routes = [
-  { path: 'myCustomers', component: MyCustomersComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: CalendarComponent, canActivate: [AuthGuard] },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  { path: '**', redirectTo: '' }
+  { path: 'myCustomers', component: MyCustomersComponent, canActivate: [OktaAuthGuard] },
+  { path: 'dashboard', component: CalendarComponent, canActivate: [OktaAuthGuard] },
+  {path: 'implicit/callback', component: OktaCallbackComponent}
 ];
 
 @NgModule({

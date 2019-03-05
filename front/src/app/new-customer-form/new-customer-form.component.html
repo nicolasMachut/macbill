@@ -1,6 +1,47 @@
+<form [formGroup]="newCustomerForm">
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Type d'entreprise</mat-label>
+      <input matInput formControlName="companyType">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Numéro de la rue</mat-label>
+      <input matInput formControlName="streetNumber">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Ligne 1</mat-label>
+      <input matInput formControlName="route">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Ligne 2</mat-label>
+      <input matInput formControlName="route2">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Code postal</mat-label>
+      <input matInput formControlName="postalCode">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>Ville</mat-label>
+      <input matInput formControlName="city">
+    </mat-form-field>
+  </div>
+</form>
 
-<mat-form-field>
-  <input matInput placeholder="Nom" [(ngModel)]="name">
-</mat-form-field>
 <button mat-button (click)="onSave()">Enregistrer</button>
 

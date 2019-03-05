@@ -3,8 +3,6 @@ package fr.macbill.workdayservice.services;
 import fr.macbill.workdayservice.models.WorkDay;
 import fr.macbill.workdayservice.repositories.WorkDayRepository;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Service
 public class WorkDayServiceImpl implements WorkDayService {
@@ -16,22 +14,17 @@ public class WorkDayServiceImpl implements WorkDayService {
     }
 
     @Override
-    public Mono<WorkDay> save(WorkDay workDay) {
+    public WorkDay save(WorkDay workDay) {
         return this.workDayRepository.save(workDay);
     }
 
     @Override
-    public Flux<WorkDay> findAll() {
-        return this.workDayRepository.findAll();
+    public Iterable<WorkDay> findAll(String userId) {
+        return this.workDayRepository.findAllByUserId(userId);
     }
 
     @Override
-    public Mono<WorkDay> findById(String workDayId) {
-        return this.workDayRepository.findById(workDayId);
-    }
-
-    @Override
-    public Mono<Void> delete(WorkDay workDay) {
-        return this.workDayRepository.delete(workDay);
+    public void delete(String id, String userId) {
+        this.workDayRepository.deleteByIdAndUserId(id, userId);
     }
 }

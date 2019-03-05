@@ -1,14 +1,14 @@
 package fr.macbill.customerService.services;
 
 import fr.macbill.customerService.documents.Customer;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 public interface CustomerService {
 
-    Flux<Customer> findAll ();
-    Mono<Customer> save (Customer customer);
-    Mono<Void> delete (Customer customer);
-    Mono<Customer> findById(String id);
+    Iterable<Customer> findAll(String sub);
+    Customer save (Customer customer);
+    void delete(String customerId, String userId);
+    Optional<Customer> findById(String s, String id);
 
 }

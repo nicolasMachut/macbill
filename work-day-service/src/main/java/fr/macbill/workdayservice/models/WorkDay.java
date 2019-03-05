@@ -27,4 +27,6 @@ public class WorkDay {
     private String title;
 
     private String customerId;
+
+    private String userId;
 }

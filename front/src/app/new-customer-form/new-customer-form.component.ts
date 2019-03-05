@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomersService} from '../services/customers.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Customer} from '../shared/models/customer.model';
+import {Address} from '../shared/models/address.model';
 
 @Component({
   selector: 'app-new-customer-form',
@@ -8,17 +11,37 @@ import {CustomersService} from '../services/customers.service';
 })
 export class NewCustomerFormComponent implements OnInit {
 
-  name: string;
+  newCustomerForm: FormGroup;
 
-  constructor(private customerService: CustomersService) { }
+  constructor(private customerService: CustomersService, private fb: FormBuilder) {
+    this.newCustomerForm = this.fb.group({
+      name: ['', Validators.required ],
+      companyType: ['', Validators.required ],
+      streetNumber: ['', Validators.required ],
+      route: ['', Validators.required ],
+      route2: ['', Validators.required ],
+      postalCode: ['', Validators.required ],
+      city: ['', Validators.required ]
+    });
+  }
 
   ngOnInit() {
     this.customerService.newCustomer.subscribe(() => {
-      this.name = '';
+      this.newCustomerForm.reset();
     });
   }
 
   onSave() {
-    this.customerService.create(this.name);
+    const customer = new Customer();
+    customer.name = this.newCustomerForm.controls.name.value;
+    customer.companyType = this.newCustomerForm.controls.companyType.value;
+    const address = new Address();
+    address.streetNumber = this.newCustomerForm.controls.streetNumber.value;
+    address.route = this.newCustomerForm.controls.route.value;
+    address.route2 = this.newCustomerForm.controls.route2.value;
+    address.postalCode = this.newCustomerForm.controls.postalCode.value;
+    address.city = this.newCustomerForm.controls.city.value;
+    customer.address = address;
+    this.customerService.create(customer);
   }
 }

@@ -6,7 +6,6 @@ import { CustomersListComponent } from './customers-list/customers-list.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app.material.module';
 import {CustomersService} from './services/customers.service';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NewCustomerFormComponent } from './new-customer-form/new-customer-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MyCustomersComponent } from './my-customers/my-customers.component';
@@ -19,9 +18,10 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './login/login.component';
-import {JwtInterceptor} from './helpers/jwt.interceptor';
-import {ErrorInterceptor} from './helpers/error.interceptor';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './shared/auth.interceptor';
+import {OktaAuthModule} from '@okta/okta-angular';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,7 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
     NewCustomerFormComponent,
     MyCustomersComponent,
     CalendarComponent,
-    NewWorkDayComponent,
-    LoginComponent
+    NewWorkDayComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +38,14 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    HttpClientModule,
     FormsModule,
     CommonModule,
+    HttpClientModule,
+    OktaAuthModule.initAuth({
+      issuer: 'https://dev-734864.okta.com/oauth2/default',
+      redirectUri: 'http://localhost:4200/implicit/callback',
+      clientId: '0oabu9wtkD4MkzXAe356'
+    }),
     FormsModule,
     NgbModalModule,
     FlatpickrModule.forRoot(),
@@ -54,8 +58,7 @@ import {ErrorInterceptor} from './helpers/error.interceptor';
     CustomersService,
     WorkDayService,
     SnackbarService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   exports: [CalendarComponent]

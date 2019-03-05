@@ -2,15 +2,14 @@ package fr.macbill.customerService.resources;
 
 import fr.macbill.customerService.documents.Customer;
 import fr.macbill.customerService.services.CustomerServiceImpl;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.Map;
+import java.util.Optional;
 
-@CrossOrigin
 @RestController
 public class CustomerResource {
 
@@ -21,27 +20,33 @@ public class CustomerResource {
     }
 
     @GetMapping(path = "/customers")
-    public Flux<Customer> findAll () {
-        return this.customerService.findAll();
+    public Iterable<Customer> findAll (Principal principal) {
+        String userId = getUserId((OAuth2Authentication) principal);
+        return this.customerService.findAll(userId);
     }
 
     @GetMapping(path = "/customer/{id}")
-    public Mono<Customer> findAll (@PathVariable String id) {
-        return this.customerService.findById(id);
+    public Optional<Customer> findAll (@PathVariable String id, Principal principal) {
+        String userId = getUserId((OAuth2Authentication) principal);
+        return this.customerService.findById(id, userId);
     }
 
     @PostMapping("/customer")
-    public Mono<Customer> createNewCustomer (@Valid @RequestBody Customer customer) {
+    public Customer createNewCustomer (@Valid @RequestBody Customer customer, Principal principal) {
+        String userId = getUserId((OAuth2Authentication) principal);
+        customer.setUserId(userId);
         return this.customerService.save(customer);
     }
 
     @DeleteMapping("/customer/{id}")
-    public Mono<ResponseEntity<Void>> deleteCustomer (@PathVariable(value = "id") String customerId) {
-        return this.customerService.findById(customerId)
-                .flatMap(existingCustomer ->
-                        customerService.delete(existingCustomer)
-                                .then(Mono.just(new ResponseEntity<Void>(HttpStatus.OK)))
-                )
-                .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public void deleteCustomer (@PathVariable(value = "id") String customerId, Principal principal) {
+        String userId = getUserId((OAuth2Authentication) principal);
+        this.customerService.delete(customerId, userId);
+    }
+
+    private String getUserId(OAuth2Authentication principal) {
+        OAuth2Authentication authentication = principal;
+        Map<String, String> user = (Map<String, String>) authentication.getUserAuthentication().getDetails();
+        return user.get("sub");
     }
 }

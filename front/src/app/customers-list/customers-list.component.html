@@ -1,6 +1,13 @@
 <mat-list role="list">
   <mat-list-item role="listitem" *ngFor="let customer of customers">
+    {{customer.id}}
     {{customer.name}}
+    {{customer.companyType}}
+    {{customer.address.streetNumber}}
+    {{customer.address.route}}
+    {{customer.address.route2}}
+    {{customer.address.postalCode}}
+    {{customer.address.city}}
     <button mat-icon-button (click)="onDelete(customer)">
       <mat-icon>delete</mat-icon>
     </button>
