@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: backend
+  data:
+    mongodb:
+      host: localhost
+      database: macbill
+
+okta:
+  oauth2:
+    client-id: 0oabu9wtkD4MkzXAe356
+    issuer: https://dev-734864.okta.com/oauth2/default
+
