@@ -9,6 +9,7 @@ import java.security.Principal;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class WorkDayResource {
 
     private final WorkDayService workDayService;

@@ -1,10 +1,6 @@
 spring:
   application:
     name: backend
-  data:
-    mongodb:
-      host: localhost
-      database: macbill
 
 okta:
   oauth2:

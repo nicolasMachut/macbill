@@ -22,6 +22,8 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './shared/auth.interceptor';
 import {OktaAuthModule} from '@okta/okta-angular';
 import { HttpClientModule } from '@angular/common/http';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     NewCustomerFormComponent,
     MyCustomersComponent,
     CalendarComponent,
-    NewWorkDayComponent
+    NewWorkDayComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     OktaAuthModule.initAuth({
       issuer: 'https://dev-734864.okta.com/oauth2/default',
-      redirectUri: 'http://localhost:4200/implicit/callback',
+      redirectUri: environment.oktaRedirectUrl,
       clientId: '0oabu9wtkD4MkzXAe356'
     }),
     FormsModule,

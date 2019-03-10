@@ -12,9 +12,9 @@ import {WorkDay} from '../shared/interfaces/WorkDay';
   styleUrls: ['./new-work-day.component.scss']
 })
 export class NewWorkDayComponent implements OnInit {
-  private customers: Array<Customer> = [];
-  private customer: Customer;
-  private workDay: WorkDay;
+  public customers: Array<Customer> = [];
+  public customer: Customer;
+  public workDay: WorkDay;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private customerService: CustomersService,

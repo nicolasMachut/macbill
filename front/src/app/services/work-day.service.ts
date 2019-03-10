@@ -11,15 +11,15 @@ export class WorkDayService {
   constructor(private httpClient: HttpClient) { }
 
   create(newDay) {
-    this.httpClient.post<WorkDay>('http://localhost:8080/workDay', newDay).subscribe(data => {
+    this.httpClient.post<WorkDay>('/api/workDay', newDay).subscribe(data => {
       data.customer = newDay.customer;
       this.newWorkDay.emit(data);
     });
   }
   delete(workDay: WorkDay) {
-    return this.httpClient.delete('http://localhost:8080/workDay/' + workDay.id);
+    return this.httpClient.delete('/api/workDay/' + workDay.id);
   }
   findAll(): Observable<WorkDay[]> {
-    return this.httpClient.get<WorkDay[]>('http://localhost:8080/workDays');
+    return this.httpClient.get<WorkDay[]>('/api/workDays');
   }
 }
