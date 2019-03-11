@@ -10,6 +10,6 @@ public interface CustomerService {
     Iterable<Customer> findAll(String sub);
     Customer save (Customer customer);
     void delete(String customerId, String userId);
-    Optional<Customer> findById(String s, String id);
+    Optional<Customer> findById(String customerId, String userId);
 
 }

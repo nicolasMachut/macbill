@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Optional<Customer> findById(String id, String userId) {
-        return this.customerRepository.findByIdAndUserId(id, userId);
+    public Optional<Customer> findById(String customerId, String userId) {
+        return this.customerRepository.findByIdAndUserId(customerId, userId);
     }
 }

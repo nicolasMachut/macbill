@@ -24,6 +24,8 @@ import {OktaAuthModule} from '@okta/okta-angular';
 import { HttpClientModule } from '@angular/common/http';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import { environment } from '../environments/environment';
+import {InvoiceService} from './services/invoice.service';
+import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { environment } from '../environments/environment';
     MyCustomersComponent,
     CalendarComponent,
     NewWorkDayComponent,
-    DashboardComponent
+    DashboardComponent,
+    MyInvoicesComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { environment } from '../environments/environment';
   providers: [
     CustomersService,
     WorkDayService,
+    InvoiceService,
     SnackbarService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
