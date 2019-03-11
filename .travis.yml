@@ -1,5 +1,9 @@
 language: java
 jdk: oraclejdk8
+cache:
+  npm: true
+  directories:
+    - $HOME/.m2
 deploy:
   provider: heroku
   app: macbill
