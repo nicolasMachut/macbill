@@ -4,6 +4,7 @@ cache:
   npm: true
   directories:
     - $HOME/.m2
+script: pwd && ls
 deploy:
   provider: heroku
   app: macbill
