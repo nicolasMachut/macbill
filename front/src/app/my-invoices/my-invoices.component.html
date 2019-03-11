@@ -1,0 +1,25 @@
+<mat-form-field>
+  <input matInput [matDatepicker]="start" placeholder="Début" [ngModel]="start | date:'yyyy-MM-dd'">
+  <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+  <mat-datepicker #start></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <input matInput [matDatepicker]="end" placeholder="Fin" [ngModel]="end | date:'yyyy-MM-dd'">
+  <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+  <mat-datepicker #end></mat-datepicker>
+</mat-form-field>
+<mat-form-field>
+  <mat-select placeholder="Client">
+    <mat-option *ngFor="let customer of customers" [value]="customer">
+      {{customer.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-button (click)="save()">
+  Valider
+</button>
+
+
+<div [innerHTML]="invoiceHtml">
+</div>
+

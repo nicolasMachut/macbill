@@ -8,7 +8,7 @@ import {MyInvoicesComponent} from './my-invoices/my-invoices.component';
 const routes: Routes = [
   { path: 'myCustomers', component: MyCustomersComponent, canActivate: [OktaAuthGuard] },
   { path: 'dashboard', component: CalendarComponent, canActivate: [OktaAuthGuard] },
-  { path: 'invoice', component: MyInvoicesComponent, canActivate: [OktaAuthGuard] },
+  { path: 'invoices', component: MyInvoicesComponent, canActivate: [OktaAuthGuard] },
   { path: 'implicit/callback', component: OktaCallbackComponent}
 ];
 
