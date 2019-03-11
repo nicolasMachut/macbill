@@ -1,1 +1,0 @@
-web: java $JAVA_OPTS -jar *.jar --spring.profiles.active=prod
