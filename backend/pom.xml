@@ -6,6 +6,11 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>backend</artifactId>
+
+	<properties>
+		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,8 +56,21 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>1.1.1</version>
 				<configuration>
-					<outputDirectory>../target/</outputDirectory>
+					<appName>macbill</appName>
+					<includeTarget>false</includeTarget>
+					<includes>
+						<include>${basedir}/${full-artifact-name}</include>
+					</includes>
+					<jdkVersion>1.8</jdkVersion>
+					<processTypes>
+						<web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+					</processTypes>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -4,9 +4,4 @@ cache:
   npm: true
   directories:
     - $HOME/.m2
-script: pwd && ls
-deploy:
-  provider: heroku
-  app: macbill
-  api_key:
-    secure: EyRCzsSZyxp4hdK8RioStVoTWjvCB2z/l9fVJUVGBatqY7BFWPfHsUZ5rgKgU/BLqqOvbLw4OKQXuLXT0IhGabEsTtw9yjNUm5Rgt6YwTLDfqICNyf9nXLtD5TehkqST3R5xrekuBHVAD1siePmvP+kpdVOorZscN2XZknnJJcNTSbBcECo+NWmNAH/Mo2pwOJtVmphQiZmVNSW878tD7l/uLe4DxgI6yQeaWoOvD42nqc0Wr5onUYYmuWVVsF1j69Dld6FjXhyF7iUEHt0PG8LEDjGtozMdvM+jls3Z47JRA6jdQSVsLpFEx3WHNmdmAaNvshzLFHgvxUi0/TNc4FyLh1QrkXpNe+pmpgFF7GyBFMoA0rgFBxYifnUeiSRtaea0CdWI60AGk4K/EJshJ2s2PgFdFGUDEQTE/BtbRGCwC8xwdCrFQup5JACRNCQj1WlB64pDF+DvPzZHJXEHFggsR58HK9bMcjhmofocanKr1SUvzQyLxCSYUHmYp9rjGDsjdGh9HcOFIpYNVsnUlfD7ghGnniuvLMq3anvjQ6Leo5kwGzSpFki0NORG0C4hsbES8HCpCbUHFthqt5MkxOd1u3vdBxn1mElrUZ3MSX9o0pQ/Z3n2mCfkzIe9P0Xf8AE2uevUHztoMVXt2M1xsYVtXL4Sw8aXPgLjk9vr8qo=
+script: cd backend && mvn heroku:deploy
