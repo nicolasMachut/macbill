@@ -29,4 +29,8 @@ public class WorkDay {
     private String customerId;
 
     private String userId;
+
+    private  boolean isTva;
+
+    private double price;
 }

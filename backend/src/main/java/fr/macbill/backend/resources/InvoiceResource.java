@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Controller
@@ -37,6 +40,20 @@ public class InvoiceResource {
         model.addAttribute("workDays", this.workDayService.findAllByCustomerId(principal.getName(), customerId, start, end));
         model.addAttribute("profile", this.profileService.findByUserId(principal.getName()));
         model.addAttribute("principal", principal);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
+
+        model.addAttribute("billingDate", dateFormat.format(calendar.getTime()));
+        String billingNumber = "";
+
+        billingNumber += calendar.get(Calendar.YEAR);
+        billingNumber += "-";
+        billingNumber += calendar.get(Calendar.MONTH) + 1;
+        billingNumber += "-";
+        billingNumber += "001";
+        model.addAttribute("billingNumber", billingNumber);
+
+
         return "invoiceTemplate";
     }
 }

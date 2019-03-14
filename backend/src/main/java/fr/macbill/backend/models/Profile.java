@@ -15,6 +15,9 @@ public class Profile {
     @Id
     private String id;
 
+    @NotEmpty
+    private String companyName;
+
     @NotNull
     private String user;
 

@@ -18,6 +18,7 @@ export class MyProfileComponent implements OnInit {
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
       id: [null],
+      companyName: ['', Validators.required],
       siret: ['', Validators.required],
       tvaIntracom: ['', Validators.required],
       owner: ['', Validators.required],
@@ -39,6 +40,7 @@ export class MyProfileComponent implements OnInit {
   objectToForm(profile: Profile) {
     this.profileForm.setValue({
       id: profile.id,
+      companyName: profile.companyName,
       siret:  profile.siret,
       tvaIntracom: profile.tvaIntracom,
       owner: profile.owner,
@@ -58,6 +60,7 @@ export class MyProfileComponent implements OnInit {
     }
     const profile = new Profile();
     profile.id = this.profileForm.controls.id.value;
+    profile.companyName = this.profileForm.controls.companyName.value;
     profile.siret =  this.profileForm.controls.siret.value;
     profile.tvaIntracom = this.profileForm.controls.tvaIntracom.value;
     profile.owner = this.profileForm.controls.owner.value;

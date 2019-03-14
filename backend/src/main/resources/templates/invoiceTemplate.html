@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 text-left">
-            <span class="font-weight-bolder">Nicolas Machut</span>
+            <span class="font-weight-bolder" th:text="${profile.companyName}"></span>
             <br/>
             <span>Siret : <span th:text="${profile.siret}"></span></span>
             <br/>
@@ -37,12 +37,12 @@
             <br/>
             <span th:text="${customer.companyType}"></span>
             <br/>
-            <span>Date : 28/02/2019</span>
+            <span>Date : <span th:text="${billingDate}"></span></span>
         </div>
     </div>
     <div class="row mt-5">
         <div class="col-md-12">
-            <span>Facture N° : 2019-02-001</span>
+            <span>Facture N° : <span th:text="${billingNumber}"></span></span>
         </div>
     </div>
     <div class="row mt-5">
@@ -117,11 +117,11 @@
         <div class="col-md-6 text-right">
             <span>Coordonnées bancaires</span>
             <br/>
-            <span>Titulaire du compte : M Nicolas Machut</span>
+            <span>Titulaire du compte : <span th:text="${profile.owner}"></span></span>
             <br/>
-            <span>IBAN : FR76 4061 8803 0000 0402 1329 719</span>
+            <span>IBAN : <span th:text="${profile.iban}"></span></span>
             <br/>
-            <span>BIC : BOUS FRPP XXX</span>
+            <span>BIC : <span th:text="${profile.bic}"></span></span>
         </div>
     </div>
 </div>
