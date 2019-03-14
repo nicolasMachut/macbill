@@ -4,6 +4,8 @@ import fr.macbill.backend.models.WorkDay;
 import fr.macbill.backend.repositories.WorkDayRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class WorkDayServiceImpl implements WorkDayService {
 
@@ -26,5 +28,10 @@ public class WorkDayServiceImpl implements WorkDayService {
     @Override
     public void delete(String id, String userId) {
         this.workDayRepository.deleteByIdAndUserId(id, userId);
+    }
+
+    @Override
+    public Iterable<WorkDay> findAllByCustomerId(String userId, String customerId, Date start, Date end) {
+        return this.workDayRepository.findAllByUserIdAndCustomerIdAndStartAfterAndEndBefore(userId, customerId, start, end);
     }
 }

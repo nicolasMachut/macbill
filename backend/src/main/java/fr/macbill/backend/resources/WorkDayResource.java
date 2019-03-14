@@ -2,11 +2,9 @@ package fr.macbill.backend.resources;
 
 import fr.macbill.backend.models.WorkDay;
 import fr.macbill.backend.services.WorkDayService;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -20,26 +18,17 @@ public class WorkDayResource {
 
     @PostMapping("/workDay")
     public WorkDay createNewWorkDay (@RequestBody WorkDay workDay, Principal principal) {
-        String userId = getUserId((OAuth2Authentication) principal);
-        workDay.setUserId(userId);
+        workDay.setUserId(principal.getName());
         return this.workDayService.save(workDay);
     }
 
     @GetMapping(path = "/workDays")
     public Iterable<WorkDay> findAll (Principal principal) {
-        String userId = getUserId((OAuth2Authentication) principal);
-        return this.workDayService.findAll(userId);
+        return this.workDayService.findAll(principal.getName());
     }
 
     @DeleteMapping("/workDay/{id}")
     public void delete (@PathVariable(value = "id") String workDayId, Principal principal) {
-        String userId = getUserId((OAuth2Authentication) principal);
-        this.workDayService.delete(workDayId, userId);
-    }
-
-    private String getUserId(OAuth2Authentication principal) {
-        OAuth2Authentication authentication = principal;
-        Map<String, String> user = (Map<String, String>) authentication.getUserAuthentication().getDetails();
-        return user.get("sub");
+        this.workDayService.delete(workDayId, principal.getName());
     }
 }

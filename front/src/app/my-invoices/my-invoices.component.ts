@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {InvoiceService} from '../services/invoice.service';
 import {CustomersService} from '../services/customers.service';
 import {Customer} from '../shared/models/customer.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-my-invoices',
@@ -10,26 +11,37 @@ import {Customer} from '../shared/models/customer.model';
 })
 export class MyInvoicesComponent implements OnInit {
 
+  registerForm: FormGroup;
   invoiceHtml: string;
   public customers: Array<Customer> = [];
-  start: Date;
-  end: Date;
+  end = new FormControl(new Date());
+  customer: Customer;
+  start = new FormControl(new Date());
 
-  constructor(private invoiceService: InvoiceService, private customerService: CustomersService) { }
+  constructor(private invoiceService: InvoiceService, private customerService: CustomersService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.start = new Date();
-    this.end = new Date();
+
+    this.registerForm = this.formBuilder.group({
+      start: ['', Validators.required],
+      end: ['', Validators.required],
+      customer: ['', [Validators.required]]
+    });
     this.customerService.findAll().subscribe((data)  => {
       this.customers = data;
-    });
-    this.invoiceService.generateInvoice('5c82fcaaf3d10e2f7b0c9d3f').subscribe((data) => {
-      this.invoiceHtml = data;
     });
   }
 
   save() {
-    console.log('test');
-    console.log(this.start);
+    if (this.registerForm.invalid) {
+      return;
+    }
+    this.invoiceService
+      .generateInvoice(this.registerForm.controls.start.value,
+        this.registerForm.controls.end.value,
+        this.registerForm.controls.customer.value)
+      .subscribe((data) => {
+      this.invoiceHtml = data;
+    });
   }
 }

@@ -11,15 +11,16 @@
         <div class="col-md-6 text-left">
             <span class="font-weight-bolder">Nicolas Machut</span>
             <br/>
-            <span>Siret : 82022283400021</span>
+            <span>Siret : <span th:text="${profile.siret}"></span></span>
             <br/>
-            <span>1 Rue du Languedoc</span>
+            <span th:text="${profile.address.route}"></span>
             <br/>
-            <span>33290 BLANQUEFORT</span>
+            <span th:text="${profile.address.postalCode}"></span>
+            <span th:text="${profile.address.city}"></span>
             <br/>
-            <span>machut.nicolas@gmail.com</span>
+            <span th:text="${principal.getName()}"></span>
             <br/>
-            <span>TVA Intracommunautaire : FR 62 820222834</span>
+            <span>TVA Intracommunautaire : <span th:text="${profile.tvaIntracom}"></span></span>
             <br/>
             <small>
                 Dispensé d’immatriculation au registre du commerce et des sociétés(RCS) et au répertoire des métiers(RM)

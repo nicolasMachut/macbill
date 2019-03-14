@@ -26,6 +26,8 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import { environment } from '../environments/environment';
 import {InvoiceService} from './services/invoice.service';
 import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import {ProfileService} from './services/profile.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
     CalendarComponent,
     NewWorkDayComponent,
     DashboardComponent,
-    MyInvoicesComponent
+    MyInvoicesComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
     WorkDayService,
     InvoiceService,
     SnackbarService,
+    ProfileService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],

@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface CustomerRepository extends CrudRepository<Customer, String> {
 
     Iterable<Customer> findAllByUserId(String userId);
-    Optional<Customer> findByIdAndUserId(String id, String userId);
+    Customer findByIdAndUserId(String id, String userId);
     void deleteByIdAndUserId(String id, String userId);
 }

@@ -23,32 +23,22 @@ public class CustomerResource {
 
     @GetMapping(path = "/customers")
     public Iterable<Customer> findAll (Principal principal) {
-        String userId = getUserId((OAuth2Authentication) principal);
-        return this.customerService.findAll(userId);
+        return this.customerService.findAll(principal.getName());
     }
 
     @GetMapping(path = "/customer/{id}")
-    public Optional<Customer> findAll (@PathVariable String id, Principal principal) {
-        String userId = getUserId((OAuth2Authentication) principal);
-        return this.customerService.findById(id, userId);
+    public Customer findById (@PathVariable String id, Principal principal) {
+        return this.customerService.findById(id, principal.getName());
     }
 
     @PostMapping("/customer")
     public Customer createNewCustomer (@Valid @RequestBody Customer customer, Principal principal) {
-        String userId = getUserId((OAuth2Authentication) principal);
-        customer.setUserId(userId);
+        customer.setUserId(principal.getName());
         return this.customerService.save(customer);
     }
 
     @DeleteMapping("/customer/{id}")
     public void deleteCustomer (@PathVariable(value = "id") String customerId, Principal principal) {
-        String userId = getUserId((OAuth2Authentication) principal);
-        this.customerService.delete(customerId, userId);
-    }
-
-    private String getUserId(OAuth2Authentication principal) {
-        OAuth2Authentication authentication = principal;
-        Map<String, String> user = (Map<String, String>) authentication.getUserAuthentication().getDetails();
-        return user.get("sub");
+        this.customerService.delete(customerId, principal.getName());
     }
 }

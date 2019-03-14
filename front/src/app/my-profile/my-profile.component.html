@@ -1,0 +1,85 @@
+<div class="container mt-5">
+  <form [formGroup]="profileForm" (ngSubmit)="save()">
+    <mat-grid-list cols="3" rowHeight="600px">
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-title>Informations sur l'entreprise</mat-card-title>
+          <mat-card-content>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Siret" formControlName="siret">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Numéro TVA intracommunautaire" formControlName="tvaIntracom">
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-title>
+            Coordonnées bancaires
+          </mat-card-title>
+          <mat-card-content>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Titulaire du compte" formControlName="owner">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="IBAN" formControlName="iban">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="BIC" formControlName="bic">
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card>
+          <mat-card-title>
+            Adresse de facturation
+          </mat-card-title>
+          <mat-card-content>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Numéro" formControlName="streetNumber">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Rue" formControlName="route">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Complément" formControlName="route2">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Code postal" formControlName="postalCode">
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput placeholder="Ville" formControlName="city">
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <button mat-button>
+      Enregistrer
+    </button>
+  </form>
+</div>
+
