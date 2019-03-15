@@ -5,6 +5,7 @@ import fr.macbill.backend.services.WorkDayService;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -23,8 +24,13 @@ public class WorkDayResource {
     }
 
     @GetMapping(path = "/workDays")
-    public Iterable<WorkDay> findAll (Principal principal) {
+    public List<WorkDay> findAll (Principal principal) {
         return this.workDayService.findAll(principal.getName());
+    }
+
+    @GetMapping(path = "/workDay/last")
+    public WorkDay findAll (Principal principal, @RequestParam("customerId") String customerId) {
+        return this.workDayService.findLastWorkDayForCustomer(customerId, principal.getName());
     }
 
     @DeleteMapping("/workDay/{id}")

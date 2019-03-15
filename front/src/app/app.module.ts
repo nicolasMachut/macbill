@@ -28,6 +28,9 @@ import {InvoiceService} from './services/invoice.service';
 import { MyInvoicesComponent } from './my-invoices/my-invoices.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import {ProfileService} from './services/profile.service';
+import {ErrorDialogComponent} from './error-dialog/errordialog.component';
+import {ErrorDialogService} from './error-dialog/errordialog.service';
+import {HttpConfigInterceptor} from './shared/httpconfig.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import {ProfileService} from './services/profile.service';
     NewWorkDayComponent,
     DashboardComponent,
     MyInvoicesComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,13 +67,19 @@ import {ProfileService} from './services/profile.service';
       useFactory: adapterFactory
     })
   ],
+  entryComponents: [
+    NewCustomerFormComponent,
+    ErrorDialogComponent
+  ],
   providers: [
     CustomersService,
     WorkDayService,
     InvoiceService,
     SnackbarService,
     ProfileService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    ErrorDialogService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   exports: [CalendarComponent]

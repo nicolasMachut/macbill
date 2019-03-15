@@ -13,10 +13,7 @@ export class MyInvoicesComponent implements OnInit {
 
   registerForm: FormGroup;
   invoiceHtml: string;
-  public customers: Array<Customer> = [];
-  end = new FormControl(new Date());
-  customer: Customer;
-  start = new FormControl(new Date());
+  customers: Array<Customer> = [];
 
   constructor(private invoiceService: InvoiceService, private customerService: CustomersService, private formBuilder: FormBuilder) { }
 

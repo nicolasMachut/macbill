@@ -17,6 +17,8 @@ import {MatDialog} from '@angular/material';
 import {WorkDayService} from '../services/work-day.service';
 import {SnackbarService} from '../services/snackbar.service';
 import {WorkDay} from '../shared/interfaces/WorkDay';
+import localeFr from '@angular/common/locales/fr';
+import {registerLocaleData} from '@angular/common';
 
 const colors: any = {
   red: {
@@ -32,6 +34,8 @@ const colors: any = {
     secondary: '#FDF1BA'
   }
 };
+
+registerLocaleData(localeFr);
 
 @NgModule({
   entryComponents: [
@@ -93,6 +97,16 @@ export class CalendarComponent implements OnInit {
       this.workDays.push(workDay);
       this.snackBarService.open('Vous avez ajouté une journée sur le client ' + workDay.title);
       this.dialog.closeAll();
+      this.refresh.next();
+    });
+  }
+
+  workDayClicked(workDay: WorkDay) {
+    this.workDayService.delete(workDay).subscribe(() => {
+      this.workDays = this.workDays.filter(wd => {
+        return wd.id !== workDay.id;
+      });
+      this.snackBarService.open('Journée pour le client ' + workDay.title + ' supprimée');
       this.refresh.next();
     });
   }

@@ -1,22 +1,30 @@
-<form>
+<form [formGroup]="newWorkDayForm" (ngSubmit)="onSaveDay()">
   <div class="form-group">
     <mat-form-field>
-      <mat-select placeholder="Client" [(ngModel)]="customer">
+      <mat-select placeholder="Client" formControlName="customer">
         <mat-option *ngFor="let customer of customers" [value]="customer">
           {{customer.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="displayEntireForm">
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" [value]="workDay.start" placeholder="Choisir une date">
+      <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choisir une date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-  <div class="form-group">
-    <button mat-button (click)="onSaveDay()">
+  <div class="form-group" *ngIf="displayEntireForm">
+    <mat-form-field>
+      <input matInput placeholder="Tarif" formControlName="price">
+    </mat-form-field>
+  </div>
+  <div class="form-group" *ngIf="displayEntireForm">
+    <mat-slide-toggle formControlName="isTva">TVA ?</mat-slide-toggle>
+  </div>
+  <div class="form-group" *ngIf="displayEntireForm">
+    <button mat-button>
       Ajouter
     </button>
   </div>

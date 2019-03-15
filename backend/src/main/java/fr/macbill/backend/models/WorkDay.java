@@ -30,7 +30,15 @@ public class WorkDay {
 
     private String userId;
 
-    private  boolean isTva;
+    private Boolean isTva;
 
     private double price;
+
+    public double getPriceHT () {
+        return this.price;
+    }
+
+    public double getPriceTTC () {
+        return this.isTva ? this.getPriceHT() * 1.20 : this.getPriceHT();
+    }
 }

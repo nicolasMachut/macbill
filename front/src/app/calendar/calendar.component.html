@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'fr' }}</h3>
     </div>
     <div class="col-md-4">
 
@@ -40,8 +40,10 @@
       *ngSwitchCase="CalendarView.Month"
       [viewDate]="viewDate"
       [events]="workDays"
+      [locale]="'fr'"
       [refresh]="refresh"
       [activeDayIsOpen]="activeDayIsOpen"
+      (eventClicked)="workDayClicked($event.event)"
       (dayClicked)="dayClicked($event.day)"
     >
     </mwl-calendar-month-view>

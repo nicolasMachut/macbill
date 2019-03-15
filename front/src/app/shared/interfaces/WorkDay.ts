@@ -4,4 +4,6 @@ import {Customer} from '../models/customer.model';
 export interface WorkDay extends CalendarEvent {
   customerId?: string;
   customer?: Customer;
+  isTva?: boolean;
+  price?: number;
 }

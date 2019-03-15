@@ -15,7 +15,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private async handleAccess(request: HttpRequest<any>, next: HttpHandler): Promise<HttpEvent<any>> {
     const accessToken = await this.oktaAuth.getAccessToken();
-    console.log(this.oktaAuth);
     request = request.clone({
       setHeaders: {
         Authorization: 'Bearer ' + accessToken

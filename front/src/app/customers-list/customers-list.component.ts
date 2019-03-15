@@ -1,8 +1,9 @@
 import {Component, NgModule, OnInit} from '@angular/core';
-import {MatList} from '@angular/material';
+import {MatDialog, MatList} from '@angular/material';
 import {CustomersService} from '../services/customers.service';
 import {Customer} from '../shared/models/customer.model';
 import {SnackbarService} from '../services/snackbar.service';
+import {NewCustomerFormComponent} from "../new-customer-form/new-customer-form.component";
 
 @NgModule({
   imports: [MatList],
@@ -15,8 +16,9 @@ import {SnackbarService} from '../services/snackbar.service';
 })
 export class CustomersListComponent implements OnInit {
   customers: Array<Customer> = [];
+  tableColumns: string[] = ['name', 'companyType', 'streetNumber', 'route', 'route2', 'postalCode', 'city', 'delete'];
 
-  constructor(private customerService: CustomersService, private snackBarService: SnackbarService) {}
+  constructor(private customerService: CustomersService, private snackBarService: SnackbarService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.customerService.findAll().subscribe(data => {
@@ -33,5 +35,17 @@ export class CustomersListComponent implements OnInit {
       this.customers = this.customers.filter(customer => customer.id !== customerToDelete.id);
     });
     this.snackBarService.open('Le client ' + customerToDelete.name + ' à été supprimé');
+  }
+
+  openModal() {
+    const dialogRef = this.dialog.open(NewCustomerFormComponent, {
+      width: '50%',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.customerService.findAll().subscribe(data => {
+        this.customers = data;
+      });
+    });
   }
 }

@@ -68,7 +68,7 @@
                     <td class="align-middle">
                         270€
                     </td>
-                    <td class="align-middle" th:text="${#lists.size(workDays) * 270} + '€'">
+                    <td class="align-middle" th:text="${totalHT}">
 
                     </td>
                 </tr>
@@ -83,7 +83,7 @@
                     <td>
                         Total Hors Taxe
                     </td>
-                    <td th:text="${#lists.size(workDays) * 270} + '€'">
+                    <td th:text="${totalHT}">
 
                     </td>
                 </tr>
@@ -91,16 +91,16 @@
                     <td>
                         TVA à 20%
                     </td>
-                    <td>
-                        1 080€
+                    <td th:text="${taxPrice}">
+
                     </td>
                 </tr>
                 <tr>
                     <td>
                         Total TTC
                     </td>
-                    <td>
-                        6 480€
+                    <td th:text="${totalTTC}">
+
                     </td>
                 </tr>
             </table>

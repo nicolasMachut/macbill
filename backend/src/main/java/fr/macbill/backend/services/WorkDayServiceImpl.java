@@ -5,6 +5,8 @@ import fr.macbill.backend.repositories.WorkDayRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class WorkDayServiceImpl implements WorkDayService {
@@ -21,7 +23,7 @@ public class WorkDayServiceImpl implements WorkDayService {
     }
 
     @Override
-    public Iterable<WorkDay> findAll(String userId) {
+    public List<WorkDay> findAll(String userId) {
         return this.workDayRepository.findAllByUserId(userId);
     }
 
@@ -31,7 +33,12 @@ public class WorkDayServiceImpl implements WorkDayService {
     }
 
     @Override
-    public Iterable<WorkDay> findAllByCustomerId(String userId, String customerId, Date start, Date end) {
+    public List<WorkDay> findAllByCustomerId(String userId, String customerId, Date start, Date end) {
         return this.workDayRepository.findAllByUserIdAndCustomerIdAndStartAfterAndEndBefore(userId, customerId, start, end);
+    }
+
+    @Override
+    public WorkDay findLastWorkDayForCustomer(String customerId, String userId) {
+        return this.workDayRepository.findTopByUserIdAndCustomerIdOrderByStartDesc(userId, customerId);
     }
 }

@@ -5,10 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Stream;
 
 @Repository
 public interface WorkDayRepository extends CrudRepository<WorkDay, String> {
-    Iterable<WorkDay> findAllByUserId(String userId);
+    List<WorkDay> findAllByUserId(String userId);
     void deleteByIdAndUserId(String id, String userId);
-    Iterable<WorkDay> findAllByUserIdAndCustomerIdAndStartAfterAndEndBefore(String userId, String customerId, Date start, Date end);
+    List<WorkDay> findAllByUserIdAndCustomerIdAndStartAfterAndEndBefore(String userId, String customerId, Date start, Date end);
+    WorkDay findTopByUserIdAndCustomerIdOrderByStartDesc (String userId, String customerId);
 }

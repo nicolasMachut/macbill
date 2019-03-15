@@ -3,14 +3,17 @@ package fr.macbill.backend.services;
 import fr.macbill.backend.models.WorkDay;
 
 import java.util.Date;
+import java.util.List;
 
 public interface WorkDayService {
 
     WorkDay save(WorkDay workDay);
 
-    Iterable<WorkDay> findAll(String userId);
+    List<WorkDay> findAll(String userId);
 
     void delete(String id, String userId);
 
-    Iterable<WorkDay> findAllByCustomerId(String userId, String customerId, Date start, Date end);
+    List<WorkDay> findAllByCustomerId(String userId, String customerId, Date start, Date end);
+
+    WorkDay findLastWorkDayForCustomer(String customerId, String userId);
 }

@@ -22,4 +22,7 @@ export class WorkDayService {
   findAll(): Observable<WorkDay[]> {
     return this.httpClient.get<WorkDay[]>('/api/workDays');
   }
+  findLastForCustomer(customerId: string): Observable<WorkDay> {
+    return this.httpClient.get<WorkDay>('/api/workDay/last?customerId=' + customerId);
+  }
 }

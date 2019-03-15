@@ -1,22 +1,47 @@
-<mat-list role="list">
-  <mat-list-item role="listitem" *ngFor="let customer of customers">
-    {{customer.id}}
-    {{customer.name}}
-    {{customer.companyType}}
-    {{customer.address.streetNumber}}
-    {{customer.address.route}}
-    {{customer.address.route2}}
-    {{customer.address.postalCode}}
-    {{customer.address.city}}
-    <button mat-icon-button (click)="onDelete(customer)">
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>launch</mat-icon>
-    </button>
-  </mat-list-item>
-</mat-list>
-
+<table mat-table [dataSource]="customers" class="mat-elevation-z8" style="width: 100%;">
+  <ng-container  matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
+    <mat-cell *matCellDef="let customer">{{customer.name}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="companyType">
+    <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+    <mat-cell *matCellDef="let customer">{{customer.companyType}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="streetNumber">
+    <mat-header-cell *matHeaderCellDef>Numéro</mat-header-cell>
+    <mat-cell *matCellDef="let customer">{{customer.address.streetNumber}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="route">
+    <mat-header-cell *matHeaderCellDef>Rue</mat-header-cell>
+    <mat-cell *matCellDef="let customer">{{customer.address.route}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="route2">
+    <mat-header-cell *matHeaderCellDef>Complément</mat-header-cell>
+    <mat-cell *matCellDef="let customer">{{customer.address.route2}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="postalCode">
+    <mat-header-cell *matHeaderCellDef>Code postal</mat-header-cell>
+    <mat-cell *matCellDef="let customer">{{customer.address.postalCode}}</mat-cell>
+  </ng-container>
+  <ng-container  matColumnDef="city">
+    <mat-header-cell *matHeaderCellDef>Ville</mat-header-cell>
+    <mat-cell *matCellDef="let customer">{{customer.address.city}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef>
+      <button mat-icon-button class="text-success" (click)="openModal()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let customer">
+      <button mat-icon-button (click)="onDelete(customer)" class="text-primary">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+</table>
 
 
 

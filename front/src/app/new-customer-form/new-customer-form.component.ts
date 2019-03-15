@@ -3,6 +3,7 @@ import {CustomersService} from '../services/customers.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../shared/models/customer.model';
 import {Address} from '../shared/models/address.model';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-new-customer-form',
@@ -13,7 +14,9 @@ export class NewCustomerFormComponent implements OnInit {
 
   newCustomerForm: FormGroup;
 
-  constructor(private customerService: CustomersService, private fb: FormBuilder) {
+  constructor(private customerService: CustomersService,
+              private fb: FormBuilder,
+              private dialogRef: MatDialogRef<NewCustomerFormComponent>) {
     this.newCustomerForm = this.fb.group({
       name: ['', Validators.required ],
       companyType: ['', Validators.required ],
@@ -28,6 +31,7 @@ export class NewCustomerFormComponent implements OnInit {
   ngOnInit() {
     this.customerService.newCustomer.subscribe(() => {
       this.newCustomerForm.reset();
+      this.dialogRef.close();
     });
   }
 
