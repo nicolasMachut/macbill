@@ -1,28 +1,42 @@
-<form [formGroup]="registerForm" (ngSubmit)="save()">
-  <mat-form-field>
-    <input matInput [matDatepicker]="start" placeholder="Début" formControlName="start">
-    <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-    <mat-datepicker #start></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="end" placeholder="Fin" formControlName="end">
-    <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
-    <mat-datepicker #end></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Client" formControlName="customer">
-      <mat-option *ngFor="let customer of customers" [value]="customer">
-        {{customer.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-button>
-    Valider
-  </button>
-</form>
-
-
-
-<div [innerHTML]="invoiceHtml">
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <form [formGroup]="registerForm" (ngSubmit)="save()">
+        <mat-form-field>
+          <input matInput [matDatepicker]="start" placeholder="Début" formControlName="start">
+          <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #start></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="end" placeholder="Fin" formControlName="end">
+          <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #end></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Client" formControlName="customer">
+            <mat-option *ngFor="let customer of customers" [value]="customer">
+              {{customer.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button>
+          Valider
+        </button>
+      </form>
+    </div>
+    <div class="col-md-10">
+      <mat-card>
+        <mat-card-content>
+          <div [innerHTML]="invoiceHtml">
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
+
+
+
+
+
 

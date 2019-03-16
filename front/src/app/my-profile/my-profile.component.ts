@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Profile} from '../shared/models/profile.model';
 import {ProfileService} from '../services/profile.service';
 import {Address} from '../shared/models/address.model';
+import {SnackbarService} from "../services/snackbar.service";
 
 @Component({
   selector: 'app-my-profile',
@@ -13,7 +14,7 @@ export class MyProfileComponent implements OnInit {
 
   profileForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) { }
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private snackBarService: SnackbarService) { }
 
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
@@ -26,7 +27,7 @@ export class MyProfileComponent implements OnInit {
       bic: ['', Validators.required],
       streetNumber: ['', Validators.required],
       route: ['', Validators.required],
-      route2: ['', Validators.required],
+      route2: [''],
       postalCode: ['', Validators.required],
       city: ['', Validators.required],
     });
@@ -75,6 +76,7 @@ export class MyProfileComponent implements OnInit {
     profile.address = address;
     this.profileService.updateProfile(profile).subscribe(p => {
       this.objectToForm(p);
+      this.snackBarService.open('Profil sauvegardé');
     });
   }
 
