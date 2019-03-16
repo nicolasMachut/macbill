@@ -6,11 +6,13 @@ import fr.macbill.backend.models.WorkDay;
 import fr.macbill.backend.services.CustomerService;
 import fr.macbill.backend.services.ProfileService;
 import fr.macbill.backend.services.WorkDayService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.text.DateFormat;
@@ -38,14 +40,14 @@ public class InvoiceResource {
                        @RequestParam("customerId") String customerId,
                        Principal principal,
                        @RequestParam("end") Date end,
-                       @RequestParam("start") Date start) throws ProfileCompleteRequiredException {
+                       @RequestParam("start") Date start) {
 
         model.addAttribute("customer", this.customerService.findById(customerId, principal.getName()));
         List<WorkDay> workDays = this.workDayService.findAllByCustomerId(principal.getName(), customerId, start, end);
         model.addAttribute("workDays", workDays);
         Profile profile = this.profileService.findByUserId(principal.getName());
         if (profile == null) {
-            throw new ProfileCompleteRequiredException();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Votre profil doit être complété");
         }
         model.addAttribute("profile", profile);
         model.addAttribute("principal", principal);

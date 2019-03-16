@@ -20,18 +20,13 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log('event--->>>', event);
+          // console.log('event--->>>', event);
           // this.errorDialogService.openDialog(event);
         }
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
-        let data = {};
-        data = {
-          reason: error.error.message,
-          status: error.status
-        };
-        this.errorDialogService.openDialog(data);
+        this.errorDialogService.openDialog(JSON.parse(error.error).message);
         return throwError(error);
       }));
   }
