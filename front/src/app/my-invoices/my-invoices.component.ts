@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InvoiceService} from '../services/invoice.service';
 import {CustomersService} from '../services/customers.service';
 import {Customer} from '../shared/models/customer.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-my-invoices',
@@ -12,7 +12,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class MyInvoicesComponent implements OnInit {
 
   registerForm: FormGroup;
-  invoiceHtml: string;
   customers: Array<Customer> = [];
 
   constructor(private invoiceService: InvoiceService, private customerService: CustomersService, private formBuilder: FormBuilder) { }
@@ -29,16 +28,25 @@ export class MyInvoicesComponent implements OnInit {
     });
   }
 
-  save() {
+  downloadInvoice() {
     if (this.registerForm.invalid) {
       return;
     }
-    this.invoiceService
-      .generateInvoice(this.registerForm.controls.start.value,
-        this.registerForm.controls.end.value,
-        this.registerForm.controls.customer.value)
-      .subscribe((data) => {
-      this.invoiceHtml = data;
+    this.invoiceService.downloadInvoice(this.registerForm.controls.start.value,
+      this.registerForm.controls.end.value,
+      this.registerForm.controls.customer.value).subscribe(response => {
+
+      const blob = new Blob([response], { type: 'application/pdf' });
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob);
+        return;
+      }
+      const data = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = data;
+      link.download = 'file.pdf';
+      link.click();
+      window.URL.revokeObjectURL(data);
     });
   }
 }

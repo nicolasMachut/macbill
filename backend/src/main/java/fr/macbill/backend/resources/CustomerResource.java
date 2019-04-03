@@ -3,13 +3,10 @@ package fr.macbill.backend.resources;
 
 import fr.macbill.backend.models.Customer;
 import fr.macbill.backend.services.CustomerServiceImpl;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")

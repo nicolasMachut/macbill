@@ -1,7 +1,7 @@
 <div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-md-2 text-center">
-      <form [formGroup]="registerForm" (ngSubmit)="save()">
+    <div class="col-md-12 text-center">
+      <form [formGroup]="registerForm" (ngSubmit)="downloadInvoice()">
         <mat-form-field>
           <input matInput [matDatepicker]="start" placeholder="Début" formControlName="start">
           <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
@@ -20,17 +20,9 @@
           </mat-select>
         </mat-form-field>
         <button mat-button>
-          Valider
+          Télécharger
         </button>
       </form>
-    </div>
-    <div class="col-md-10">
-      <mat-card>
-        <mat-card-content>
-          <div [innerHTML]="invoiceHtml">
-          </div>
-        </mat-card-content>
-      </mat-card>
     </div>
   </div>
 </div>
