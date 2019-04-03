@@ -45,3 +45,6 @@ Thumbs.dbs
 
 .node
 .nodes_modules
+
+/target/
+/node/

@@ -10,4 +10,5 @@ public class Invoice {
     private Customer customer;
     private Profile profile;
     private Principal principal;
+    private String date;
 }

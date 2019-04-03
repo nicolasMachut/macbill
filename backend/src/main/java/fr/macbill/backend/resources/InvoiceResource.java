@@ -16,6 +16,9 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -49,6 +52,19 @@ public class InvoiceResource {
         invoice.setInvoiceNumber("1234567890");
         invoice.setProfile(profile);
         invoice.setPrincipal(principal);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
+        invoice.setDate(dateFormat.format(calendar.getTime()));
+
+        String billingNumber = "";
+
+        billingNumber += calendar.get(Calendar.YEAR);
+        billingNumber += "-";
+        billingNumber += String.format("%02d", calendar.get(Calendar.MONTH) + 1);
+        billingNumber += "-";
+        billingNumber += "001";
+        invoice.setInvoiceNumber(billingNumber);
+
         this.invoiceService.generateInvoiceFor(invoice, Locale.FRANCE, response.getOutputStream());
         response.getOutputStream().flush();
         response.flushBuffer();

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_template" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ec102fc4-ef14-48e8-8798-cfb5cda98544">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="invoice" class="fr.macbill.backend.models.Invoice"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<pageHeader>
+		<band height="143">
+			<textField>
+				<reportElement x="290" y="0" width="260" height="20" uuid="168834bc-e969-4982-9ed0-26591bcaa24d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{invoice}.getCustomer().getName()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="20" width="260" height="20" uuid="ddcbf535-4ea6-4201-ba9a-d9744cb7f08b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{invoice}.getCustomer().getAddress().getStreetNumber() + " " + $P{invoice}.getCustomer().getAddress().getRoute()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="40" width="260" height="20" uuid="4f949703-2043-46de-90a6-f85eb4399682"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{invoice}.getCustomer().getAddress().getPostalCode() + " " + $P{invoice}.getCustomer().getAddress().getCity()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="60" width="260" height="20" uuid="02d5ef45-e687-4755-89e9-09de247fbcb2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{invoice}.getCustomer().getCompanyType()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="260" height="20" uuid="43ebd9a2-0ff2-47df-80d6-affc7cf0df51"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{invoice}.getProfile().getCompanyName()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="260" height="20" uuid="ccc12269-b82f-4b2e-ad2d-59c48c3a6cee"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["Siret : "  + $P{invoice}.getProfile().getSiret()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="260" height="20" uuid="4c8f742b-afd9-45ea-8b61-3db33bdba5ab"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{invoice}.getProfile().getAddress().getStreetNumber() + " " + $P{invoice}.getProfile().getAddress().getRoute()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="60" width="260" height="20" uuid="8184e9f8-d672-475b-a5a7-641973a99ca2"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{invoice}.getProfile().getAddress().getPostalCode() + " " + $P{invoice}.getProfile().getAddress().getCity()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="80" width="260" height="20" uuid="161ce782-778a-4838-85f5-a1acc812fac5"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{invoice}.getPrincipal().getName()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="100" width="260" height="20" uuid="d3bb95b4-e829-4f70-841d-6314155cc051"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["TVA Intracommunautaire : "  + $P{invoice}.getProfile().getTvaIntracom()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="120" width="260" height="20" uuid="240e14a6-08bc-4026-891d-cffa60f8b6af"/>
+				<textElement textAlignment="Left">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dispensé d’immatriculation au registre du commerce et des sociétés(RCS) et au répertoire des métiers(RM)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="80" width="260" height="20" uuid="ae7d84f4-ef44-4c9f-90de-d96a9c663260"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Date : " + $P{invoice}.getDate()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="30">
+			<textField>
+				<reportElement x="0" y="10" width="260" height="20" uuid="20c1fe5a-6854-432d-af67-01bbc18d1370"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["Facture N° : " + $P{invoice}.getInvoiceNumber()]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50"/>
+	</detail>
+	<pageFooter>
+		<band height="100">
+			<textField>
+				<reportElement x="290" y="0" width="260" height="20" uuid="3f688193-368a-42dd-9042-8fc4f48f5870"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Coordonnées bancaires"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="20" width="260" height="20" uuid="7006fd24-eab3-4f0e-9139-83288a9502d6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Titulaire du compte : "  + $P{invoice}.getProfile().getOwner()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="40" width="260" height="20" uuid="ae34add8-71e7-4249-b492-d2ff8f0d105f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["IBAN : "  + $P{invoice}.getProfile().getIban()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="60" width="260" height="20" uuid="d77a02f9-89a8-4d68-bb33-7589138e37d8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["BIC : "  + $P{invoice}.getProfile().getBic()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="260" height="40" uuid="abcd2adf-57a5-4e5c-9c9f-e7cbbe33eb98"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["Date de Règlement : paiement par virement interbancaire à quarante-cinq (45) jours fin de mois, à compter de la date d'émission de la facture."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="260" height="60" uuid="5133ca48-52de-470f-a008-7d9ea977e5f0"/>
+				<textElement textAlignment="Left" markup="none">
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date d'exécution de la prestation : null Taxe de pénalités à compter du : 46ème jour à compter de la date de facturation. En l'absence de paiement : 2,79 % Conditions d'escompte : Pas d'escompte pour règlement anticipé."]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

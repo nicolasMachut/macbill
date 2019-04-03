@@ -24,4 +24,7 @@
 /.nb-gradle/
 /build/
 
-./node_modules
+node_modules
+/front/node_modules
+/front/node
+/front/target
