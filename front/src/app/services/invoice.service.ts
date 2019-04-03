@@ -7,10 +7,6 @@ export class InvoiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  generateInvoice(start: Date, end: Date, customer: Customer) {
-    return this.httpClient.get('/api/invoice?customerId=' + customer.id + '&start=' + start + '&end=' + end, {responseType: 'text'});
-  }
-
   downloadInvoice(start: Date, end: Date, customer: Customer) {
     return this.httpClient.get('/api/invoice/pdf?customerId=' + customer.id + '&start=' + start + '&end=' + end, {responseType: 'blob'});
   }
